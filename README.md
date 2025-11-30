@@ -30,42 +30,6 @@ Cabeça
 self.head_position
 Inteiro assinado que aponta para o índice atual da fita.
 
-
-Aqui está uma proposta completa de documentação técnica para o seu projeto. Este texto está formatado em Markdown, pronto para ser copiado para um arquivo README.md ou convertido para um relatório PDF.
-Ele cobre a arquitetura, a lógica teórica e os resultados de teste.
-
-Documentação Técnica: Simulador de Máquina de Turing Universal
-1. Visão Geral do Projeto
-Este projeto consiste na implementação de um Simulador de Máquina de Turing Determinística (MT) em Python. O objetivo principal é demonstrar a capacidade de processamento de algoritmos baseados em autômatos finitos com memória em fita infinita.
-Como caso de uso principal, o sistema implementa um Incrementador Universal (Sucessor). Diferente de implementações estáticas, este software é capaz de ler um alfabeto arbitrário definido pelo usuário (Binário, Decimal, Hexadecimal, Base-36, etc.) e aplicar a lógica de soma aritmética (n+1) adaptada dinamicamente a esse alfabeto.
-2. Estrutura do Projeto
-O código foi modularizado para separar o motor de execução da lógica de configuração.
-2.1 Arquivos e Responsabilidades
-turing_machine.py (O Motor): Contém a classe TuringMachine. É o núcleo genérico que não possui conhecimento sobre "números" ou "soma". Ele apenas executa transições baseadas em estados, leitura e escrita.
-incrementer.py (A Lógica): Responsável por gerar a tabela de transições (δ) dinamicamente. Ele analisa o alfabeto fornecido e cria as regras de estado para navegar até o fim da fita e realizar o "vai-um" (carry) na volta.
-main.py (O Controlador): Gerencia a entrada/saída (I/O). Lê o arquivo de configuração, valida os dados, instancia a máquina e exibe os resultados passo a passo.
-fitas.txt (A Entrada): Arquivo de texto onde a primeira linha define o alfabeto e as linhas subsequentes contêm as entradas a serem processadas.
-3. Definição Formal e Implementação
-A implementação segue rigorosamente a definição matemática de uma Máquina de Turing M=(Q,Σ,Γ,δ,q0​,qaceita​,qrejeita​).
-Componente Teórico
-Representação no Código (Python)
-Detalhes de Implementação
-Fita (Γ)
-self.tape = {}
-Implementada como um Dicionário (Hash Map). Isso permite uma fita virtualmente infinita (índices negativos e positivos) sem alocação prévia de memória.
-Estados (Q)
-self.states
-Conjunto de strings (ex: 'q_move_right', 'q_increment').
-Alfabeto (Σ)
-self.alphabet
-Lista de caracteres lida da 1ª linha de fitas.txt.
-Transição (δ)
-self.transitions
-Dicionário onde a chave é (estado_atual, simbolo_lido) e o valor é (novo_estado, simbolo_escrito, direção).
-Cabeça
-self.head_position
-Inteiro assinado que aponta para o índice atual da fita.
-
 4. Lógica do Algoritmo "Incrementador Universal"
 O algoritmo gerado em incrementer.py opera em três fases lógicas para calcular o sucessor de um número em qualquer base:
 Fase 1: Posicionamento (q_move_right)
